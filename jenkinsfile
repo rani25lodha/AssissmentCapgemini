@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/rani25lodha/AssissmentCapgemini' // replace with your actual GitHub repo
+                git url :'https://github.com/rani25lodha/AssissmentCapgemini' , branch : 'main' // replace with your actual GitHub repo
             }
         }
 
