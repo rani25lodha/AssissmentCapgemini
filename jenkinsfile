@@ -2,10 +2,10 @@ pipeline {
     agent any
 
     environment {
-        ACR_LOGIN_SERVER = 'demoregistry1001.azurecr.io'    // your ACR login server
-        IMAGE_NAME = 'nodeconsoleapp1'                      // your image name
-        CREDENTIALS_ID = 'jenkins-pipeline-sp'              // Jenkins ACR credentials ID
-        KUBECONFIG_CREDENTIAL_ID = 'kubeconfig-cred-id'     // (new) Jenkins ID for kubeconfig
+        ACR_LOGIN_SERVER = 'demoregistry1001.azurecr.io'
+        IMAGE_NAME = 'nodeconsoleapp1'
+        CREDENTIALS_ID = 'jenkins-pipeline-sp'
+        KUBECONFIG_CREDENTIAL_ID = 'kubeconfig-cred-id'
     }
 
     stages {
@@ -33,12 +33,72 @@ pipeline {
             }
         }
 
+        stage('Verify Kubectl and Connection') {
+            steps {
+                bat 'kubectl version --client'
+
+                withCredentials([file(credentialsId: "${KUBECONFIG_CREDENTIAL_ID}", variable: 'KUBECONFIG')]) {
+                    bat '''
+                    @echo off
+                    set KUBECONFIG_FILE=%KUBECONFIG%
+                    echo Checking cluster access...
+                    kubectl --kubeconfig="%KUBECONFIG_FILE%" cluster-info
+                    '''
+                }
+            }
+        }
+
         stage('Deploy to Kubernetes') {
             steps {
                 withCredentials([file(credentialsId: "${KUBECONFIG_CREDENTIAL_ID}", variable: 'KUBECONFIG')]) {
-                    sh '''
-                    kubectl apply -f deployment.yaml
-                    kubectl apply -f service.yaml
+                    bat '''
+                    @echo off
+                    set KUBECONFIG_FILE=%KUBECONFIG%
+
+                    echo Creating deployment.yaml...
+                    echo apiVersion: apps/v1 > deployment.yaml
+                    echo kind: Deployment >> deployment.yaml
+                    echo metadata: >> deployment.yaml
+                    echo   name: nodeconsoleapp-deployment >> deployment.yaml
+                    echo   labels: >> deployment.yaml
+                    echo     app: nodeconsoleapp >> deployment.yaml
+                    echo spec: >> deployment.yaml
+                    echo   replicas: 3 >> deployment.yaml
+                    echo   selector: >> deployment.yaml
+                    echo     matchLabels: >> deployment.yaml
+                    echo       app: nodeconsoleapp >> deployment.yaml
+                    echo   template: >> deployment.yaml
+                    echo     metadata: >> deployment.yaml
+                    echo       labels: >> deployment.yaml
+                    echo         app: nodeconsoleapp >> deployment.yaml
+                    echo     spec: >> deployment.yaml
+                    echo       containers: >> deployment.yaml
+                    echo       - name: nodeconsoleapp >> deployment.yaml
+                    echo         image: demoregistry1001.azurecr.io/nodeconsoleapp1:latest >> deployment.yaml
+                    echo         ports: >> deployment.yaml
+                    echo         - containerPort: 3000 >> deployment.yaml
+
+                    echo Creating service.yaml...
+                    echo apiVersion: v1 > service.yaml
+                    echo kind: Service >> service.yaml
+                    echo metadata: >> service.yaml
+                    echo   name: nodeconsoleapp-service >> service.yaml
+                    echo spec: >> service.yaml
+                    echo   type: LoadBalancer >> service.yaml
+                    echo   selector: >> service.yaml
+                    echo     app: nodeconsoleapp >> service.yaml
+                    echo   ports: >> service.yaml
+                    echo   - protocol: TCP >> service.yaml
+                    echo     port: 80 >> service.yaml
+                    echo     targetPort: 3000 >> service.yaml
+
+                    echo Applying manifests...
+                    kubectl --kubeconfig="%KUBECONFIG_FILE%" apply -f deployment.yaml
+                    kubectl --kubeconfig="%KUBECONFIG_FILE%" apply -f service.yaml
+
+                    echo Verifying deployment...
+                    kubectl --kubeconfig="%KUBECONFIG_FILE%" get pods
+                    kubectl --kubeconfig="%KUBECONFIG_FILE%" get svc
                     '''
                 }
             }
@@ -47,10 +107,10 @@ pipeline {
 
     post {
         success {
-            echo '✅ Image pushed and deployed to Kubernetes successfully!'
+            echo '✅ Image pushed and deployed successfully!'
         }
         failure {
-            echo '❌ Pipeline failed during some step!'
+            echo '❌ Pipeline failed!'
         }
     }
 }
