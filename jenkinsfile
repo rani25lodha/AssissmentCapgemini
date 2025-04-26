@@ -5,6 +5,7 @@ pipeline {
         ACR_LOGIN_SERVER = 'demoregistry1001.azurecr.io'         // replace with your ACR login server
         IMAGE_NAME = 'nodeconsoleapp1'                     // your image name
         CREDENTIALS_ID = 'jenkins-pipeline-sp'                        // Jenkins ID for ACR credentials
+        KUBECONFIG_CREDENTIAL_ID = 'kubeconfig-cred-id'     // (new) Jenkins ID for kubeconfig
     }
 
     stages {
@@ -29,6 +30,17 @@ pipeline {
                     docker.withRegistry("https://${ACR_LOGIN_SERVER}", "${CREDENTIALS_ID}") {
                         dockerImage.push('latest')
                     }
+                }
+            }
+        }
+    }
+  stage('Deploy to Kubernetes') {
+            steps {
+                withCredentials([file(credentialsId: "${KUBECONFIG_CREDENTIAL_ID}", variable: 'KUBECONFIG')]) {
+                    sh '''
+                    kubectl apply -f deployment.yaml
+                    kubectl apply -f service.yaml
+                    '''
                 }
             }
         }
