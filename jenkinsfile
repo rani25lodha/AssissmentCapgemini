@@ -2,15 +2,15 @@ pipeline {
     agent any
 
     environment {
-        ACR_LOGIN_SERVER = 'demogistry1001.azurecr.io'         // replace with your ACR login server
+        ACR_LOGIN_SERVER = 'demoregistry1001.azurecr.io'         // replace with your ACR login server
         IMAGE_NAME = 'nodeconsoleapp1'                     // your image name
-        CREDENTIALS_ID = 'acrCreds'                        // Jenkins ID for ACR credentials
+        CREDENTIALS_ID = 'jenkins-pipeline-sp'                        // Jenkins ID for ACR credentials
     }
 
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/yourusername/your-repo.git' // replace with your actual GitHub repo
+                git 'https://github.com/rani25lodha/AssissmentCapgemini' // replace with your actual GitHub repo
             }
         }
 
