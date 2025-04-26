@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\DELL\\Desktop\\Capgemini Training\\Module3\\AssignmentQuestion2\\NodeConsoleApp1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B6653670-937A-FD82-8420-66A1C2390AED}|NodeConsoleApp1\\NodeConsoleApp1.esproj|c:\\users\\dell\\desktop\\capgemini training\\module3\\assignmentquestion2\\nodeconsoleapp1\\nodeconsoleapp1\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{B6653670-937A-FD82-8420-66A1C2390AED}|NodeConsoleApp1\\NodeConsoleApp1.esproj|solutionrelative:nodeconsoleapp1\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6653670-937A-FD82-8420-66A1C2390AED}|NodeConsoleApp1\\NodeConsoleApp1.esproj|c:\\users\\dell\\desktop\\capgemini training\\module3\\assignmentquestion2\\nodeconsoleapp1\\nodeconsoleapp1\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{B6653670-937A-FD82-8420-66A1C2390AED}|NodeConsoleApp1\\NodeConsoleApp1.esproj|solutionrelative:nodeconsoleapp1\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "app.js",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Capgemini Training\\Module3\\AssignmentQuestion2\\NodeConsoleApp1\\NodeConsoleApp1\\app.js",
+              "RelativeDocumentMoniker": "NodeConsoleApp1\\app.js",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Capgemini Training\\Module3\\AssignmentQuestion2\\NodeConsoleApp1\\NodeConsoleApp1\\app.js",
+              "RelativeToolTip": "NodeConsoleApp1\\app.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-25T15:45:40.287Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "package.json",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Capgemini Training\\Module3\\AssignmentQuestion2\\NodeConsoleApp1\\NodeConsoleApp1\\package.json",
+              "RelativeDocumentMoniker": "NodeConsoleApp1\\package.json",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\Capgemini Training\\Module3\\AssignmentQuestion2\\NodeConsoleApp1\\NodeConsoleApp1\\package.json",
+              "RelativeToolTip": "NodeConsoleApp1\\package.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-25T15:45:08.972Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
